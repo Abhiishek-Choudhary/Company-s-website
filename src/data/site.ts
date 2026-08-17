@@ -17,10 +17,10 @@ export const site = {
     landmark: '4 km from Vidhan Sabha, Raipur',
   },
   contact: {
-    phone: '+91 98765 43210',
-    phoneRaw: '+919876543210',
-    whatsapp: '+919876543210',
-    email: 'info@jaisantoshicasting.com',
+    phone: '+91 95897 05740',
+    phoneRaw: '+919589705740',
+    whatsapp: '+919589705740',
+    email: 'krishnakumarchaudhary108@gmail.com',
     hours: 'Mon – Sat, 9:00 AM – 7:00 PM',
   },
   geo: {
