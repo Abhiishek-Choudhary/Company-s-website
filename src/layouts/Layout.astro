@@ -1,5 +1,5 @@
 ---
-import { site } from '../data/site';
+import { site, videos } from '../data/site';
 
 interface Props {
   title?: string;
@@ -112,6 +112,23 @@ const jsonLd = {
       ],
       parentOrganization: { '@id': `${site.url}#organization` },
     },
+    ...videos.map((v) => ({
+      '@type': 'VideoObject',
+      '@id': `${site.url}#video-${v.id}`,
+      name: v.title,
+      description: v.description,
+      thumbnailUrl: [
+        `https://i.ytimg.com/vi/${v.id}/hqdefault.jpg`,
+        `https://i.ytimg.com/vi/${v.id}/maxresdefault.jpg`,
+      ],
+      uploadDate: v.uploadDate,
+      duration: v.duration,
+      contentUrl: `https://www.youtube.com/watch?v=${v.id}`,
+      embedUrl: `https://www.youtube-nocookie.com/embed/${v.id}`,
+      publisher: { '@id': `${site.url}#organization` },
+      isPartOf: { '@id': `${site.url}#website` },
+      inLanguage: 'en',
+    })),
   ],
 };
 ---

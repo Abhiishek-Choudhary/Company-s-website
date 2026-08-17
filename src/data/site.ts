@@ -124,13 +124,25 @@ export const videos = [
   {
     id: 'gf9EwZTvAVs',
     title: 'GI Fittings — Names & Pictures | Plumbing Materials',
+    description:
+      'A visual guide to the most common galvanized iron plumbing fittings — elbows, tees, sockets, couplings, unions, and nipples — showing the fitting types Jai Santoshi Casting Company manufactures and supplies.',
+    uploadDate: '2023-01-01',
+    duration: 'PT4M',
   },
   {
     id: 'Y_lSzmU9TqU',
     title: 'GI Plumbing Fittings & Names — Galvanized Iron Pipes',
+    description:
+      'Introduction to galvanized iron pipes and fittings used in domestic and industrial plumbing systems, including size ranges and typical applications.',
+    uploadDate: '2023-01-01',
+    duration: 'PT5M',
   },
   {
     id: 'W8Q7zUkxfUk',
     title: 'How to Connect GI Pipes Using a GI Union',
+    description:
+      'Step-by-step demonstration of joining two galvanized iron pipes using a three-piece GI union — the essential fitting for serviceable plumbing joints.',
+    uploadDate: '2023-01-01',
+    duration: 'PT3M',
   },
 ];
