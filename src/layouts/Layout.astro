@@ -99,13 +99,23 @@ const jsonLd = {
         { '@type': 'State', name: 'Chhattisgarh' },
         { '@type': 'Country', name: 'India' },
       ],
-      makesOffer: [
-        'GI Elbow', 'GI Tee', 'GI Socket', 'GI Coupling', 'GI Union',
-        'GI Nipple', 'GI Reducer', 'GI Bush', 'GI Cap', 'GI Cross',
-      ].map((p) => ({
-        '@type': 'Offer',
-        itemOffered: { '@type': 'Product', name: p, category: 'Galvanized Iron Pipe Fittings' },
-      })),
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'GI Pipe Fittings Catalog',
+        itemListElement: [
+          'GI Elbow', 'GI Tee', 'GI Socket', 'GI Coupling', 'GI Union',
+          'GI Nipple', 'GI Reducer', 'GI Bush', 'GI Cap', 'GI Cross',
+        ].map((p) => ({
+          '@type': 'OfferCatalog',
+          name: p,
+          description: `${p} — hot-dip galvanized iron pipe fitting, ISI IS 1879 standard, sizes 1/2" to 4"`,
+        })),
+      },
+      knowsAbout: [
+        'Galvanized Iron Pipe Fittings', 'GI Fittings', 'Malleable Iron Fittings',
+        'Plumbing Fittings', 'Pipe Fittings Manufacturing', 'Casting',
+        'ISI IS 1879 Fittings', 'Government Building Plumbing Supplies',
+      ],
       employee: [
         { '@type': 'Person', name: 'Sanjeev Agarwal', jobTitle: 'Director' },
         { '@type': 'Person', name: 'Krishna Kumar Chaudhary', jobTitle: 'Manager' },
