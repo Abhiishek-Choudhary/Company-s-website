@@ -1,0 +1,229 @@
+---
+import { site } from '../data/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+  path?: string;
+}
+
+const {
+  title = `${site.name} — GI Pipe Fittings Manufacturer in Raipur, Chhattisgarh`,
+  description = site.description,
+  path = '/',
+} = Astro.props;
+
+const canonical = new URL(path, site.url).toString();
+const ogImage = new URL('/og-image.svg', site.url).toString();
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': ['LocalBusiness', 'Manufacturer'],
+  '@id': site.url,
+  name: site.name,
+  alternateName: site.shortName,
+  description: site.description,
+  url: site.url,
+  logo: new URL(site.logo, site.url).toString(),
+  image: ogImage,
+  telephone: site.contact.phone,
+  email: site.contact.email,
+  foundingDate: site.founded,
+  priceRange: '₹₹',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: site.address.street,
+    addressLocality: site.address.city,
+    addressRegion: site.address.state,
+    postalCode: site.address.postalCode,
+    addressCountry: 'IN',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: site.geo.latitude,
+    longitude: site.geo.longitude,
+  },
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+      opens: '09:00',
+      closes: '19:00',
+    },
+  ],
+  areaServed: [
+    { '@type': 'State', name: 'Chhattisgarh' },
+    { '@type': 'Country', name: 'India' },
+  ],
+  makesOffer: [
+    'GI Elbow', 'GI Tee', 'GI Socket', 'GI Coupling', 'GI Union',
+    'GI Nipple', 'GI Reducer', 'GI Bush', 'GI Cap', 'GI Cross',
+  ].map((p) => ({
+    '@type': 'Offer',
+    itemOffered: { '@type': 'Product', name: p, category: 'Galvanized Iron Pipe Fittings' },
+  })),
+  employee: [
+    { '@type': 'Person', name: 'Sanjeev Agarwal', jobTitle: 'Director' },
+    { '@type': 'Person', name: 'Krishna Kumar Chaudhary', jobTitle: 'Manager' },
+  ],
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#c8102e" />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content={site.keywords.join(', ')} />
+    <meta name="author" content={site.name} />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="googlebot" content="index, follow" />
+    <link rel="canonical" href={canonical} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="en_IN" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <meta name="geo.region" content="IN-CT" />
+    <meta name="geo.placename" content="Raipur, Chhattisgarh" />
+    <meta name="geo.position" content={`${site.geo.latitude};${site.geo.longitude}`} />
+    <meta name="ICBM" content={`${site.geo.latitude}, ${site.geo.longitude}`} />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap"
+    />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body>
+    <slot />
+    <style is:global>
+      :root {
+        --red: #c8102e;
+        --red-dark: #7a0a1c;
+        --gold: #ffd447;
+        --charcoal: #1a1a1a;
+        --slate: #2a2f36;
+        --muted: #6b7280;
+        --bg: #fafaf7;
+        --card: #ffffff;
+        --border: #e8e6df;
+        --steel: linear-gradient(135deg, #4a5461 0%, #2a2f36 100%);
+        --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06);
+        --shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+        --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.15);
+        --radius: 14px;
+      }
+
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+
+      html { scroll-behavior: smooth; }
+
+      body {
+        font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+        color: var(--charcoal);
+        background: var(--bg);
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      h1, h2, h3, h4 {
+        font-family: 'Playfair Display', Georgia, serif;
+        line-height: 1.2;
+        color: var(--charcoal);
+        letter-spacing: -0.01em;
+      }
+
+      h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); font-weight: 800; }
+      h2 { font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 700; }
+      h3 { font-size: 1.35rem; font-weight: 700; }
+
+      p { color: var(--slate); }
+
+      a { color: inherit; text-decoration: none; }
+
+      img { max-width: 100%; display: block; }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 clamp(1rem, 3vw, 2rem);
+      }
+
+      .section {
+        padding: clamp(4rem, 8vw, 7rem) 0;
+      }
+
+      .eyebrow {
+        display: inline-block;
+        font-size: 0.78rem;
+        font-weight: 600;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--red);
+        padding: 0.4rem 0.8rem;
+        border: 1px solid rgba(200, 16, 46, 0.25);
+        border-radius: 999px;
+        background: rgba(200, 16, 46, 0.05);
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.85rem 1.6rem;
+        font-family: 'Inter', sans-serif;
+        font-size: 0.95rem;
+        font-weight: 600;
+        border-radius: 999px;
+        border: none;
+        cursor: pointer;
+        transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+        text-decoration: none;
+      }
+
+      .btn-primary {
+        background: var(--red);
+        color: #fff;
+        box-shadow: 0 6px 16px rgba(200, 16, 46, 0.35);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        background: var(--red-dark);
+        box-shadow: 0 10px 22px rgba(200, 16, 46, 0.4);
+      }
+
+      .btn-ghost {
+        background: transparent;
+        color: #fff;
+        border: 1.5px solid rgba(255, 255, 255, 0.55);
+      }
+
+      .btn-ghost:hover {
+        background: rgba(255, 255, 255, 0.12);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+      }
+    </style>
+  </body>
+</html>

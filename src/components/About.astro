@@ -1,0 +1,240 @@
+---
+import { site, leadership } from '../data/site';
+---
+
+<section id="about" class="section about">
+  <div class="container">
+    <div class="grid">
+      <div class="about-copy">
+        <span class="eyebrow">About the Company</span>
+        <h2>Cast in Chhattisgarh. Trusted across India.</h2>
+        <p class="lede">
+          {site.name} is a leading manufacturer of galvanized iron (GI) pipe fittings,
+          based on <strong>Vidhan Sabha Road, Jaroda</strong> — just 4 km from Vidhan Sabha,
+          Raipur. For over two decades we have supplied plumbers, contractors, and large
+          government buildings with fittings that are engineered for one purpose:
+          <em>to be installed once and last for a hundred years.</em>
+        </p>
+
+        <div class="pillars">
+          <article class="pillar">
+            <div class="pillar-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2 4 6v6c0 5 3.5 8.5 8 10 4.5-1.5 8-5 8-10V6l-8-4z"/>
+                <path d="m9 12 2 2 4-4"/>
+              </svg>
+            </div>
+            <h3>Built for a Century</h3>
+            <p>Hot-dip galvanized malleable iron — install once and forget it. Our fittings serve government buildings that must run for generations.</p>
+          </article>
+
+          <article class="pillar">
+            <div class="pillar-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="9"/>
+                <path d="M12 3v18M3 12h18"/>
+              </svg>
+            </div>
+            <h3>ISI Standard</h3>
+            <p>Every fitting meets IS 1879 specifications. BSPT/NPT threads for a leak-tight seal on every joint.</p>
+          </article>
+
+          <article class="pillar">
+            <div class="pillar-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 12h4l3-9 4 18 3-9h4"/>
+              </svg>
+            </div>
+            <h3>Reliable Supply</h3>
+            <p>Full inventory across sizes from 1/2" to 4". Same-day dispatch for standard sizes. Bulk orders for large projects.</p>
+          </article>
+
+          <article class="pillar">
+            <div class="pillar-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                <circle cx="12" cy="7" r="4"/>
+              </svg>
+            </div>
+            <h3>People You Can Reach</h3>
+            <p>Director and manager on the floor every day — no call centres, no runaround. Just direct answers from the people responsible.</p>
+          </article>
+        </div>
+      </div>
+
+      <aside class="about-side">
+        <div class="quote-card">
+          <span class="quote-mark">"</span>
+          <blockquote>
+            A fitting is a small thing until the day it fails. We build ours so that day never comes.
+          </blockquote>
+          <cite>— The Jai Santoshi Team</cite>
+        </div>
+
+        <div class="leaders">
+          <h3>Leadership</h3>
+          {leadership.map((p) => (
+            <div class="leader">
+              <div class="leader-avatar">
+                <img
+                  src={p.photo}
+                  alt={`${p.name}, ${p.role}`}
+                  loading="lazy"
+                  onerror={`this.replaceWith(Object.assign(document.createElement('div'),{className:'leader-fallback',textContent:'${p.name.split(' ').map(w=>w[0]).join('').slice(0,2)}'}))`}
+                />
+              </div>
+              <div>
+                <strong>{p.name}</strong>
+                <span>{p.role}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about { background: var(--bg); }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: start;
+  }
+
+  .about h2 { margin: 1rem 0 1.2rem; }
+
+  .lede {
+    font-size: 1.08rem;
+    color: var(--slate);
+    max-width: 62ch;
+  }
+
+  .pillars {
+    margin-top: 2.5rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.2rem;
+  }
+
+  .pillar {
+    padding: 1.4rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+  .pillar:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow);
+    border-color: rgba(200, 16, 46, 0.35);
+  }
+
+  .pillar-icon {
+    width: 42px; height: 42px;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(135deg, rgba(200,16,46,0.1), rgba(200,16,46,0.02));
+    color: var(--red);
+    margin-bottom: 0.85rem;
+  }
+  .pillar-icon svg { width: 22px; height: 22px; }
+
+  .pillar h3 { font-size: 1.1rem; margin-bottom: 0.4rem; }
+  .pillar p { font-size: 0.92rem; color: var(--muted); }
+
+  .about-side { display: flex; flex-direction: column; gap: 1.5rem; }
+
+  .quote-card {
+    padding: 2rem 1.8rem 1.6rem;
+    background: linear-gradient(160deg, var(--charcoal) 0%, #2a2f36 100%);
+    color: #fff;
+    border-radius: var(--radius);
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+  .quote-card::before {
+    content: '';
+    position: absolute;
+    inset: -2px -2px auto auto;
+    width: 140px; height: 140px;
+    background: radial-gradient(circle, rgba(255,212,71,0.2), transparent 60%);
+    pointer-events: none;
+  }
+  .quote-mark {
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    line-height: 0.6;
+    color: var(--gold);
+    display: block;
+  }
+  blockquote {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.15rem;
+    line-height: 1.4;
+    color: rgba(255,255,255,0.94);
+    margin: 0.4rem 0 1rem;
+  }
+  cite {
+    font-style: normal;
+    font-size: 0.82rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,212,71,0.9);
+  }
+
+  .leaders {
+    padding: 1.6rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+  }
+  .leaders h3 {
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--muted);
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+  .leader {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 0.7rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .leader:last-child { border-bottom: none; }
+  .leader-avatar {
+    width: 52px; height: 52px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: var(--steel);
+    flex-shrink: 0;
+    display: grid; place-items: center;
+    border: 2px solid var(--gold);
+  }
+  .leader-avatar img { width: 100%; height: 100%; object-fit: cover; }
+  :global(.leader-fallback) {
+    width: 100%; height: 100%;
+    display: grid; place-items: center;
+    color: var(--gold);
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+  }
+  .leader strong { display: block; font-size: 0.98rem; }
+  .leader span { font-size: 0.82rem; color: var(--muted); }
+
+  @media (max-width: 900px) {
+    .grid { grid-template-columns: 1fr; }
+    .pillars { grid-template-columns: 1fr; }
+  }
+</style>

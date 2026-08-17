@@ -1,0 +1,183 @@
+---
+import { products, videos } from '../data/site';
+
+const iconPaths: Record<string, string> = {
+  elbow: 'M4 20V10a6 6 0 0 1 6-6h10',
+  tee: 'M4 12h16M12 4v16',
+  coupling: 'M6 12h12M8 8v8M16 8v8',
+  union: 'M4 12h6M14 12h6M10 8v8M14 8v8',
+  nipple: 'M6 10h12v4H6zM4 12h2M18 12h2',
+  reducer: 'M4 8h8v8H4zM12 10h8v4h-8z',
+  cap: 'M6 12h10a2 2 0 0 1 2 2v2H4v-2a2 2 0 0 1 2-2z',
+  cross: 'M4 12h16M12 4v16M8 8l8 8M16 8l-8 8',
+};
+---
+
+<section id="products" class="section products">
+  <div class="container">
+    <header class="section-head">
+      <span class="eyebrow">Products</span>
+      <h2>The Complete GI Fitting Range</h2>
+      <p class="lede">
+        From half-inch domestic plumbing to four-inch industrial mains — every GI fitting you need,
+        cast to ISI IS 1879 standards, hot-dip galvanized, and ready to install.
+      </p>
+    </header>
+
+    <div class="product-grid">
+      {products.map((p) => (
+        <article class="product-card">
+          <div class="product-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d={iconPaths[p.icon] ?? iconPaths.coupling}/>
+            </svg>
+          </div>
+          <h3>{p.name}</h3>
+          <div class="sizes">Sizes: <strong>{p.sizes}</strong></div>
+          <p>{p.description}</p>
+          <a href="#contact" class="product-link">Enquire →</a>
+        </article>
+      ))}
+    </div>
+
+    <div class="video-block">
+      <header class="section-head">
+        <span class="eyebrow">Watch & Learn</span>
+        <h2>Understanding GI Fittings</h2>
+        <p class="lede">
+          A quick visual guide to the fittings we manufacture and how they are used in real plumbing systems.
+        </p>
+      </header>
+
+      <div class="video-grid">
+        {videos.map((v, i) => (
+          <figure class="video-card">
+            <div class="video-wrap">
+              <iframe
+                src={`https://www.youtube-nocookie.com/embed/${v.id}`}
+                title={v.title}
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
+              ></iframe>
+            </div>
+            <figcaption>{v.title}</figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .products { background: linear-gradient(180deg, #fafaf7 0%, #f2efe6 100%); }
+
+  .section-head { text-align: center; max-width: 700px; margin: 0 auto 3rem; }
+  .section-head h2 { margin: 1rem 0 0.9rem; }
+  .section-head .lede { color: var(--slate); font-size: 1.05rem; }
+
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.2rem;
+  }
+
+  .product-card {
+    padding: 1.6rem 1.4rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .product-card::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--red), var(--gold));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+  .product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow);
+    border-color: rgba(200,16,46,0.35);
+  }
+  .product-card:hover::before { transform: scaleX(1); }
+
+  .product-icon {
+    width: 48px; height: 48px;
+    border-radius: 12px;
+    background: var(--steel);
+    color: var(--gold);
+    display: grid;
+    place-items: center;
+    margin-bottom: 0.4rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  }
+  .product-icon svg { width: 24px; height: 24px; }
+
+  .product-card h3 { font-size: 1.15rem; }
+  .sizes {
+    font-size: 0.82rem;
+    color: var(--muted);
+    letter-spacing: 0.02em;
+  }
+  .sizes strong { color: var(--charcoal); font-weight: 600; }
+  .product-card p { font-size: 0.9rem; color: var(--slate); flex: 1; }
+  .product-link {
+    align-self: flex-start;
+    margin-top: 0.4rem;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--red);
+    padding: 0.35rem 0;
+    border-bottom: 1.5px solid transparent;
+    transition: border-color 0.18s ease;
+  }
+  .product-link:hover { border-color: var(--red); }
+
+  .video-block { margin-top: 5rem; }
+
+  .video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.4rem;
+  }
+
+  .video-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.22s ease, box-shadow 0.22s ease;
+  }
+  .video-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+
+  .video-wrap {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    background: #000;
+  }
+  .video-wrap iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    border: 0;
+  }
+
+  .video-card figcaption {
+    padding: 0.95rem 1.1rem 1.1rem;
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: var(--slate);
+  }
+</style>
