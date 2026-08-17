@@ -79,7 +79,7 @@ const iconPaths: Record<string, string> = {
 
   .product-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr));
     gap: 1.2rem;
   }
 
@@ -148,8 +148,16 @@ const iconPaths: Record<string, string> = {
 
   .video-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
     gap: 1.4rem;
+  }
+
+  @media (max-width: 560px) {
+    .section-head { margin-bottom: 2.2rem; }
+    .product-grid { gap: 0.9rem; }
+    .product-card { padding: 1.3rem 1.15rem; }
+    .video-block { margin-top: 3.5rem; }
+    .video-grid { gap: 1rem; }
   }
 
   .video-card {

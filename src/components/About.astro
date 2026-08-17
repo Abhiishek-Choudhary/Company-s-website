@@ -235,6 +235,16 @@ import { site, leadership } from '../data/site';
 
   @media (max-width: 900px) {
     .grid { grid-template-columns: 1fr; }
-    .pillars { grid-template-columns: 1fr; }
+    .pillars { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+
+  @media (max-width: 560px) {
+    .pillars { grid-template-columns: 1fr; gap: 0.9rem; margin-top: 2rem; }
+    .pillar { padding: 1.2rem; }
+    .quote-card { padding: 1.5rem 1.3rem 1.2rem; }
+    blockquote { font-size: 1.05rem; }
+    .leaders { padding: 1.3rem; }
+    .leader-avatar { width: 46px; height: 46px; }
+    .about .lede { font-size: 1rem; }
   }
 </style>

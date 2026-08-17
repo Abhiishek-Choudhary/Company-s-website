@@ -195,6 +195,16 @@ const mapLink = `https://www.google.com/maps/search/?api=1&query=${mapQuery}`;
 
   @media (max-width: 900px) {
     .contact-grid { grid-template-columns: 1fr; }
-    .contact-cards { grid-template-columns: 1fr; }
+    .contact-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .map-card { min-height: 300px; order: -1; }
+  }
+
+  @media (max-width: 560px) {
+    .contact-cards { grid-template-columns: 1fr; gap: 0.75rem; }
+    .ccard { padding: 1rem; }
+    .ccard strong { font-size: 0.94rem; word-break: break-word; }
+    .ccard em { font-size: 0.76rem; }
+    .map-card { min-height: 260px; }
+    .map-link { right: 8px; bottom: 8px; padding: 0.4rem 0.7rem; font-size: 0.76rem; }
   }
 </style>

@@ -132,9 +132,14 @@ const jsonLd = {
         --radius: 14px;
       }
 
-      * { box-sizing: border-box; margin: 0; padding: 0; }
+      * { box-sizing: border-box; margin: 0; padding: 0; min-width: 0; }
 
-      html { scroll-behavior: smooth; }
+      html {
+        scroll-behavior: smooth;
+        -webkit-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+        overflow-x: hidden;
+      }
 
       body {
         font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
@@ -142,6 +147,8 @@ const jsonLd = {
         background: var(--bg);
         line-height: 1.6;
         -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+        min-height: 100vh;
       }
 
       h1, h2, h3, h4 {
@@ -149,26 +156,39 @@ const jsonLd = {
         line-height: 1.2;
         color: var(--charcoal);
         letter-spacing: -0.01em;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        hyphens: auto;
       }
 
-      h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); font-weight: 800; }
-      h2 { font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 700; }
-      h3 { font-size: 1.35rem; font-weight: 700; }
+      h1 { font-size: clamp(1.85rem, 5.2vw + 0.4rem, 3.6rem); font-weight: 800; }
+      h2 { font-size: clamp(1.55rem, 3.6vw + 0.3rem, 2.6rem); font-weight: 700; }
+      h3 { font-size: clamp(1.1rem, 2vw + 0.35rem, 1.35rem); font-weight: 700; }
 
-      p { color: var(--slate); }
+      p { color: var(--slate); overflow-wrap: break-word; }
 
       a { color: inherit; text-decoration: none; }
 
-      img { max-width: 100%; display: block; }
+      img, video, iframe, svg { max-width: 100%; height: auto; }
+      img, video { display: block; }
+
+      button, input, textarea, select { font: inherit; }
+
+      button, a.btn, [role="button"] { touch-action: manipulation; }
 
       .container {
+        width: 100%;
         max-width: 1200px;
         margin: 0 auto;
-        padding: 0 clamp(1rem, 3vw, 2rem);
+        padding: 0 clamp(1rem, 4vw, 2rem);
       }
 
       .section {
-        padding: clamp(4rem, 8vw, 7rem) 0;
+        padding: clamp(3.5rem, 8vw, 7rem) 0;
+      }
+
+      @media (max-width: 480px) {
+        .container { padding: 0 1rem; }
       }
 
       .eyebrow {
