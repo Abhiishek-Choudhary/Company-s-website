@@ -125,8 +125,11 @@ const year = new Date().getFullYear();
     padding: 0.28rem 0;
     font-style: normal;
     line-height: 1.55;
+    overflow-wrap: anywhere;
+    word-break: break-word;
     transition: color 0.18s ease;
   }
+  .foot-cols > div { min-width: 0; }
   .foot-cols a:hover { color: var(--gold); }
 
   .foot-bottom {

@@ -125,6 +125,11 @@ const waLink = `https://wa.me/${waNumber}?text=${waMessage}`;
     border-radius: var(--radius);
     color: var(--charcoal);
     transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    overflow: hidden;
+  }
+  .ccard > div:not(.ccard-icon) {
+    min-width: 0;
+    flex: 1;
   }
   .ccard:hover {
     transform: translateY(-3px);
@@ -157,6 +162,12 @@ const waLink = `https://wa.me/${waNumber}?text=${waMessage}`;
     font-size: 0.98rem;
     font-weight: 600;
     color: var(--charcoal);
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    line-height: 1.35;
+  }
+  .ccard em {
+    overflow-wrap: anywhere;
   }
   .ccard em {
     font-style: normal;
