@@ -2,12 +2,15 @@
 /index.html                       /                                 301
 /home                             /                                 301
 
-# SEO-friendly section shortcuts
+# SEO-friendly section shortcuts (that map to sections on the home page)
 /about                            /#about                           301
-/products                         /#products                        301
 /contact                          /#contact                         301
-/gi-fittings                      /#products                        301
-/gi-pipe-fittings                 /#products                        301
+
+# Product catalogue keyword URLs → real /products page
+/gi-fittings                      /products/                        301
+/gi-pipe-fittings                 /products/                        301
+/catalogue                        /products/                        301
+/catalog                          /products/                        301
 
 # Common query destinations
 /quote                            /#contact                         301

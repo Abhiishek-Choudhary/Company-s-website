@@ -4,7 +4,7 @@ import { site } from '../data/site';
 
 <header class="site-header">
   <div class="container header-inner">
-    <a href="#home" class="brand" aria-label={site.name}>
+    <a href="/" class="brand" aria-label={site.name}>
       <span class="brand-mark">JS</span>
       <span class="brand-text">
         <strong>Jai Santoshi</strong>
@@ -13,10 +13,10 @@ import { site } from '../data/site';
     </a>
 
     <nav class="nav" aria-label="Primary">
-      <a href="#home">Home</a>
-      <a href="#about">About</a>
-      <a href="#products">Products</a>
-      <a href="#contact">Contact</a>
+      <a href="/">Home</a>
+      <a href="/#about">About</a>
+      <a href="/products/">Products</a>
+      <a href="/#contact">Contact</a>
     </nav>
 
     <a href={`tel:${site.contact.phoneRaw}`} class="cta">

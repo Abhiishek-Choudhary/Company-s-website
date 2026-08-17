@@ -1,16 +1,5 @@
 ---
 import { products, videos } from '../data/site';
-
-const iconPaths: Record<string, string> = {
-  elbow: 'M4 20V10a6 6 0 0 1 6-6h10',
-  tee: 'M4 12h16M12 4v16',
-  coupling: 'M6 12h12M8 8v8M16 8v8',
-  union: 'M4 12h6M14 12h6M10 8v8M14 8v8',
-  nipple: 'M6 10h12v4H6zM4 12h2M18 12h2',
-  reducer: 'M4 8h8v8H4zM12 10h8v4h-8z',
-  cap: 'M6 12h10a2 2 0 0 1 2 2v2H4v-2a2 2 0 0 1 2-2z',
-  cross: 'M4 12h16M12 4v16M8 8l8 8M16 8l-8 8',
-};
 ---
 
 <section id="products" class="section products">
@@ -26,18 +15,22 @@ const iconPaths: Record<string, string> = {
 
     <div class="product-grid">
       {products.map((p) => (
-        <article class="product-card">
-          <div class="product-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-              <path d={iconPaths[p.icon] ?? iconPaths.coupling}/>
-            </svg>
+        <a href={`/products/#${p.slug}`} class="product-card" aria-label={`View ${p.name} details and photos`} data-astro-prefetch>
+          <div class="product-thumb">
+            <img src={p.images[0]} alt={`${p.name} — Jai Santoshi Casting Company`} loading="lazy" width="320" height="220" />
           </div>
-          <h3>{p.name}</h3>
-          <div class="sizes">Sizes: <strong>{p.sizes}</strong></div>
-          <p>{p.description}</p>
-          <a href="#contact" class="product-link">Enquire →</a>
-        </article>
+          <div class="product-body">
+            <h3>{p.name}</h3>
+            <div class="sizes">Sizes: <strong>{p.sizes}</strong></div>
+            <p>{p.short}</p>
+            <span class="product-link">View details →</span>
+          </div>
+        </a>
       ))}
+    </div>
+
+    <div class="products-cta">
+      <a href="/products/" class="btn btn-primary">Browse the full product catalogue →</a>
     </div>
 
     <div class="video-block">
@@ -84,13 +77,12 @@ const iconPaths: Record<string, string> = {
   }
 
   .product-card {
-    padding: 1.6rem 1.4rem;
     background: var(--card);
     border: 1px solid var(--border);
     border-radius: var(--radius);
     display: flex;
     flex-direction: column;
-    gap: 0.55rem;
+    color: inherit;
     transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
     position: relative;
     overflow: hidden;
@@ -104,6 +96,7 @@ const iconPaths: Record<string, string> = {
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.3s ease;
+    z-index: 2;
   }
   .product-card:hover {
     transform: translateY(-6px);
@@ -111,38 +104,53 @@ const iconPaths: Record<string, string> = {
     border-color: rgba(200,16,46,0.35);
   }
   .product-card:hover::before { transform: scaleX(1); }
+  .product-card:hover .product-thumb img { transform: scale(1.06); }
 
-  .product-icon {
-    width: 48px; height: 48px;
-    border-radius: 12px;
-    background: var(--steel);
-    color: var(--gold);
-    display: grid;
-    place-items: center;
-    margin-bottom: 0.4rem;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  .product-thumb {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: linear-gradient(135deg, #f2efe6, #e8e6df);
   }
-  .product-icon svg { width: 24px; height: 24px; }
+  .product-thumb img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
 
-  .product-card h3 { font-size: 1.15rem; }
+  .product-body {
+    padding: 1.15rem 1.25rem 1.3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex: 1;
+  }
+
+  .product-card h3 { font-size: 1.1rem; }
   .sizes {
-    font-size: 0.82rem;
+    font-size: 0.8rem;
     color: var(--muted);
     letter-spacing: 0.02em;
   }
   .sizes strong { color: var(--charcoal); font-weight: 600; }
-  .product-card p { font-size: 0.9rem; color: var(--slate); flex: 1; }
+  .product-card p { font-size: 0.88rem; color: var(--slate); flex: 1; }
   .product-link {
     align-self: flex-start;
-    margin-top: 0.4rem;
-    font-size: 0.88rem;
+    margin-top: 0.3rem;
+    font-size: 0.86rem;
     font-weight: 600;
     color: var(--red);
-    padding: 0.35rem 0;
+    padding: 0.25rem 0;
     border-bottom: 1.5px solid transparent;
     transition: border-color 0.18s ease;
   }
-  .product-link:hover { border-color: var(--red); }
+  .product-card:hover .product-link { border-color: var(--red); }
+
+  .products-cta {
+    margin-top: 3rem;
+    display: flex;
+    justify-content: center;
+  }
 
   .video-block { margin-top: 5rem; }
 

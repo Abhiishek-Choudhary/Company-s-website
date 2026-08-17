@@ -1,0 +1,274 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import WhatsAppFab from '../components/WhatsAppFab.astro';
+import { products, site } from '../data/site';
+
+const title = `GI Pipe Fittings Product Catalogue — ${site.name}`;
+const description = `Complete photo catalogue of galvanized iron pipe fittings manufactured by ${site.name}: elbows, tees, sockets, unions, nipples, reducers, caps, and crosses. Sizes 1/2" to 4", ISI IS 1879 standard.`;
+---
+
+<Layout title={title} description={description} path="/products/">
+  <Header />
+
+  <main class="products-page">
+    <section class="page-hero">
+      <div class="container">
+        <a href="/" class="back-link">← Back to Home</a>
+        <span class="eyebrow">Product Catalogue</span>
+        <h1>Our Complete GI Fitting Range</h1>
+        <p class="lede">
+          Photos of every fitting we manufacture — cast to ISI IS 1879 standards, hot-dip galvanized
+          for a century of service. Click any thumbnail to see it full-size, or scroll for details.
+        </p>
+
+        <nav class="quick-nav" aria-label="Product categories">
+          {products.map((p) => (
+            <a href={`#${p.slug}`}>{p.name}</a>
+          ))}
+        </nav>
+      </div>
+    </section>
+
+    <div class="container">
+      {products.map((p, idx) => (
+        <article id={p.slug} class={`product-section ${idx % 2 === 0 ? 'left' : 'right'}`}>
+          <div class="p-info">
+            <span class="p-num">{String(idx + 1).padStart(2, '0')}</span>
+            <h2>{p.name}</h2>
+            <div class="p-sizes">Sizes: <strong>{p.sizes}</strong></div>
+            <p>{p.description}</p>
+            <div class="p-actions">
+              <a href={`https://wa.me/${site.contact.whatsapp.replace(/[^0-9]/g,'')}?text=${encodeURIComponent(`Hello, I would like to enquire about ${p.name}.`)}`}
+                 target="_blank" rel="noopener" class="btn btn-primary">Enquire on WhatsApp</a>
+              <a href={`tel:${site.contact.phoneRaw}`} class="btn btn-outline">Call {site.contact.phone}</a>
+            </div>
+          </div>
+
+          <div class="p-gallery">
+            {p.images.map((img, i) => (
+              <figure class="p-image">
+                <img
+                  src={img}
+                  alt={`${p.name} — photo ${i + 1} — ${site.name}`}
+                  loading="lazy"
+                  width="600"
+                  height="450"
+                />
+              </figure>
+            ))}
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <section class="cta-band">
+      <div class="container cta-inner">
+        <div>
+          <h2>Need a custom order or bulk quantity?</h2>
+          <p>We supply plumbers, contractors, and government projects across Chhattisgarh and India. Same-day dispatch on standard sizes.</p>
+        </div>
+        <div class="cta-actions">
+          <a href={`tel:${site.contact.phoneRaw}`} class="btn btn-primary">Call {site.contact.phone}</a>
+          <a href="/#contact" class="btn btn-outline">Contact Us</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+  <WhatsAppFab />
+</Layout>
+
+<style>
+  .products-page { padding-top: 5rem; }
+
+  .page-hero {
+    padding: clamp(2.5rem, 5vw, 4rem) 0 clamp(2rem, 4vw, 3rem);
+    background: linear-gradient(180deg, #fafaf7 0%, #f2efe6 100%);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .back-link {
+    display: inline-block;
+    font-size: 0.88rem;
+    color: var(--muted);
+    margin-bottom: 1rem;
+    padding: 0.4rem 0.8rem 0.4rem 0;
+    border-radius: 8px;
+    transition: color 0.18s ease;
+  }
+  .back-link:hover { color: var(--red); }
+
+  .page-hero h1 {
+    margin: 0.8rem 0 1rem;
+  }
+
+  .page-hero .lede {
+    font-size: 1.05rem;
+    color: var(--slate);
+    max-width: 62ch;
+  }
+
+  .quick-nav {
+    margin-top: 1.6rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .quick-nav a {
+    padding: 0.5rem 0.9rem;
+    font-size: 0.82rem;
+    font-weight: 500;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    color: var(--slate);
+    transition: all 0.18s ease;
+  }
+  .quick-nav a:hover {
+    background: var(--red);
+    border-color: var(--red);
+    color: #fff;
+    transform: translateY(-2px);
+  }
+
+  .product-section {
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: clamp(1.8rem, 4vw, 3.5rem);
+    align-items: start;
+    padding: clamp(3rem, 6vw, 5rem) 0;
+    border-bottom: 1px solid var(--border);
+    scroll-margin-top: 6rem;
+  }
+  .product-section:last-of-type { border-bottom: none; }
+
+  .product-section.right {
+    grid-template-columns: 1.15fr 0.85fr;
+  }
+  .product-section.right .p-info { order: 2; }
+  .product-section.right .p-gallery { order: 1; }
+
+  .p-info { position: sticky; top: 6rem; }
+  .p-num {
+    display: inline-block;
+    font-family: 'Playfair Display', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    background: var(--charcoal);
+    padding: 0.25rem 0.7rem;
+    border-radius: 999px;
+    margin-bottom: 1rem;
+  }
+  .p-info h2 { margin-bottom: 0.9rem; }
+  .p-sizes {
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin-bottom: 1rem;
+  }
+  .p-sizes strong { color: var(--charcoal); font-weight: 600; }
+  .p-info p {
+    font-size: 1rem;
+    color: var(--slate);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+  .p-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--charcoal);
+    border: 1.5px solid var(--charcoal);
+  }
+  .btn-outline:hover {
+    background: var(--charcoal);
+    color: #fff;
+    transform: translateY(-2px);
+  }
+
+  .p-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+    gap: 0.9rem;
+  }
+
+  .p-image {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border-radius: var(--radius);
+    background: #eee;
+    border: 1px solid var(--border);
+    transition: transform 0.22s ease, box-shadow 0.22s ease;
+  }
+  .p-image:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow);
+  }
+  .p-image img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+  .p-image:hover img { transform: scale(1.06); }
+
+  .cta-band {
+    background: linear-gradient(160deg, var(--charcoal) 0%, #2a2f36 100%);
+    color: #fff;
+    padding: clamp(3rem, 6vw, 5rem) 0;
+    margin-top: 2rem;
+  }
+
+  .cta-inner {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .cta-band h2 { color: #fff; margin-bottom: 0.6rem; }
+  .cta-band p { color: rgba(255,255,255,0.75); font-size: 1.05rem; }
+
+  .cta-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: flex-end;
+  }
+  .cta-band .btn-outline {
+    color: #fff;
+    border-color: rgba(255,255,255,0.55);
+  }
+  .cta-band .btn-outline:hover {
+    background: #fff;
+    color: var(--charcoal);
+  }
+
+  @media (max-width: 900px) {
+    .product-section,
+    .product-section.right {
+      grid-template-columns: 1fr;
+    }
+    .product-section.right .p-info { order: 1; }
+    .product-section.right .p-gallery { order: 2; }
+    .p-info { position: static; }
+    .cta-inner { grid-template-columns: 1fr; }
+    .cta-actions { justify-content: flex-start; }
+  }
+
+  @media (max-width: 560px) {
+    .products-page { padding-top: 4.5rem; }
+    .p-info h2 { font-size: 1.6rem; }
+    .p-info p { font-size: 0.95rem; }
+    .p-gallery { grid-template-columns: repeat(2, 1fr); gap: 0.6rem; }
+    .p-actions .btn { width: 100%; justify-content: center; }
+    .quick-nav a { font-size: 0.76rem; padding: 0.4rem 0.75rem; }
+  }
+</style>
