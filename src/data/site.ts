@@ -14,7 +14,7 @@ export const site = {
     state: 'Chhattisgarh',
     postalCode: '493111',
     country: 'India',
-    landmark: '4 km from Vidhan Sabha, Raipur',
+    landmark: '8 km from Vidhan Sabha, Raipur',
   },
   contact: {
     phone: '+91 95897 05740',
