@@ -4,7 +4,7 @@ export const site = {
   tagline: 'Trusted GI Pipe Fittings for a Lifetime of Reliable Plumbing',
   description:
     'Jai Santoshi Casting Company is a leading manufacturer and supplier of premium galvanized iron (GI) pipe fittings in Raipur, Chhattisgarh. Serving plumbers, contractors, and government building projects across India with ISI-standard elbows, tees, sockets, couplings, unions, nipples and full malleable iron fitting ranges.',
-  url: 'https://jaisantoshicasting.com',
+  url: 'https://jaisantoshicastingcompany.netlify.app',
   logo: '/favicon.svg',
   founded: '1998',
   address: {

@@ -41,7 +41,7 @@ const slides = [
         <article class={`slide${i === 0 ? ' is-active' : ''}`} data-slide aria-hidden={i !== 0}>
           <div class="slide-copy">
             <span class="eyebrow">{slide.kicker}</span>
-            <h1>{slide.headline}</h1>
+            {i === 0 ? <h1>{slide.headline}</h1> : <h2 class="slide-title">{slide.headline}</h2>}
             <p class="lede">{slide.sub}</p>
             <p class="accent">{slide.accent}</p>
             <div class="hero-ctas">
@@ -199,9 +199,15 @@ const slides = [
     border-color: rgba(255, 212, 71, 0.3);
   }
 
-  .slide h1 {
+  .slide h1,
+  .slide .slide-title {
     color: #fff;
     margin: 1.2rem 0 1rem;
+    font-size: clamp(1.85rem, 5.2vw + 0.4rem, 3.6rem);
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
   }
 
   .lede {
