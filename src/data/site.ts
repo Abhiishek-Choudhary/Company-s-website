@@ -9,10 +9,10 @@ export const site = {
   founded: '1998',
   address: {
     street: 'Vidhan Sabha Road, Jaroda',
-    locality: 'Mowa',
+    locality: 'Jaroda',
     city: 'Raipur',
     state: 'Chhattisgarh',
-    postalCode: '492005',
+    postalCode: '493111',
     country: 'India',
     landmark: '4 km from Vidhan Sabha, Raipur',
   },
